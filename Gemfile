@@ -24,6 +24,8 @@ gem 'webpacker'
 gem 'shopify_app', '~> 7.2.8'
 # Secret management
 gem 'figaro'
+# Manage multiple processes in development
+gem 'foreman'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
