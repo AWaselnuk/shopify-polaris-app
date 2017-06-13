@@ -4,6 +4,15 @@
 
 This app is a way to experiment with integrating [Shopify's Polaris design system](https://polaris.shopify.com/) with an embedded Shopify app.
 
+## TODO
+
+* API calls to get Product data
+* Data flow via Redux
+* Translations in JS
+* Figure out foreman issue below
+* Organization for Polaris styles
+* Server side rendering
+
 ## Setup
 
 TODO
