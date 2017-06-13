@@ -5,6 +5,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import {Page} from '@shopify/polaris'
+import '@shopify/polaris/styles.css'
+
+const App = props => (
+  <div>
+    <Page title="Your Product Listing" primaryAction={{content: 'View', disabled: true}}>
+      <Hello name="React" />
+    </Page>
+  </div>
+)
 
 const Hello = props => (
   <div>Hello {props.name}!</div>
@@ -22,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const appRoot = document.getElementById('AppRoot');
 
   ReactDOM.render(
-    <Hello name="React" />,
+    <App />,
     appRoot,
   )
 })
