@@ -54,3 +54,11 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+
+if ENV.fetch("RAILS_ENV") == 'development'
+  ssl_bind '127.0.0.1', '3000', {
+    key: Figaro.env.ssl_key_path,
+    cert: Figaro.env.ssl_cert_path,
+    verify_mode: 'none'
+  }
+end
