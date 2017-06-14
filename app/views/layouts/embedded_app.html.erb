@@ -6,8 +6,6 @@
     <title><%= application_name %></title>
     <%= stylesheet_link_tag 'application' %>
     <%= stylesheet_pack_tag 'application' %>
-    <%= javascript_include_tag 'application', "data-turbolinks-track" => true %>
-    <%= javascript_pack_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -21,6 +19,17 @@
     </div>
 
     <%= render 'layouts/flash_messages' %>
+
+    <script>
+      window.ShopifyAPI = {};
+      ShopifyAPI.products = <%= raw @products.to_json %>;
+
+      window.ShopifyShop = {};
+      ShopifyShop.url = "<%= @shop_session.url %>";
+    </script>
+
+    <%= javascript_include_tag 'application', "data-turbolinks-track" => true %>
+    <%= javascript_pack_tag 'application' %>
 
     <script src="https://cdn.shopify.com/s/assets/external/app.js?<%= Time.now.strftime('%Y%m%d%H') %>"></script>
 

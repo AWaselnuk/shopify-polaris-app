@@ -5,28 +5,30 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import {Page} from '@shopify/polaris'
+import {Page, ResourceList, Thumbnail} from '@shopify/polaris'
+
+// This gets magically converted to a stylesheet named 'application' via stylesheet_pack_tag
 import '@shopify/polaris/styles.css'
+
+// TODO: Switch out for client side API call
+const products = ShopifyAPI.products;
+const productItems = products.map((product) => {
+  return {
+    url: "https://${ShopifyShop.url}/admin/products/${product.id}",
+    media: <Thumbnail source={product.images.map((img) => img.src)[0] || ''} alt={product.title} />,
+    attributeOne: product.title,
+    attributeTwo: product.product_type,
+    attributeThree: "Tags: ${product.tags}"
+  };
+});
 
 const App = props => (
   <div>
     <Page title="Your Product Listing" primaryAction={{content: 'View', disabled: true}}>
-      <Hello name="React" />
+      <ResourceList items={productItems} renderItem={() => {}} />
     </Page>
   </div>
-)
-
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
-
-Hello.defaultProps = {
-  name: 'David'
-}
-
-Hello.propTypes = {
-  name: PropTypes.string
-}
+);
 
 document.addEventListener('DOMContentLoaded', () => {
   const appRoot = document.getElementById('AppRoot');
@@ -34,5 +36,5 @@ document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <App />,
     appRoot,
-  )
+  );
 })
