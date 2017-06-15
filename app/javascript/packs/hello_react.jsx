@@ -12,20 +12,25 @@ import '@shopify/polaris/styles.css'
 
 // TODO: Switch out for client side API call
 const products = ShopifyAPI.products;
-const productItems = products.map((product) => {
-  return {
-    url: "https://${ShopifyShop.url}/admin/products/${product.id}",
+
+const productItemRenderer = (product, index) => {
+  const productItem = {
+    url: `https://${ShopifyShop.url}/admin/products/${product.id}`,
     media: <Thumbnail source={product.images.map((img) => img.src)[0] || ''} alt={product.title} />,
     attributeOne: product.title,
     attributeTwo: product.product_type,
-    attributeThree: "Tags: ${product.tags}"
-  };
-});
+    attributeThree: `Tags: ${product.tags}`
+  }
+
+  return (
+    <ResourceList.Item key={index} {...productItem} />
+  );
+}
 
 const App = props => (
   <div>
     <Page title="Your Product Listing" primaryAction={{content: 'View', disabled: true}}>
-      <ResourceList items={productItems} renderItem={() => {}} />
+      <ResourceList items={products} renderItem={productItemRenderer} />
     </Page>
   </div>
 );
